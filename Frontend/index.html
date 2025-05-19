@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Mymoon" />
+    <meta name="description" content="Product Management System" />
+    <meta name="Keywords" content="Product, Management, mobile, laptop" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>CRUDS</title>
+  </head>
+
+  <body>
+    <div class="cruds">
+      <!-- Success delete Message Box -->
+      <div id="messageBox" class="message-success"></div>
+      <div class="header">
+        <h1>Product Management System</h1>
+      </div>
+      <div class="input">
+        <input
+          type="text"
+          id="name"
+          placeholder="Product: S24 Ultra, iPhone 14, Asus ,,,"
+        />
+        <div class="price">
+          <input
+            onkeyup="calculateTotal()"
+            type="text"
+            id="price"
+            placeholder="Price  (SEK)"
+          />
+          <input
+            onkeyup="calculateTotal()"
+            type="text"
+            id="discount"
+            placeholder="Discount"
+          />
+          <p id="total"></p>
+        </div>
+        <input type="number" id="count" placeholder="Count" />
+
+        <div class="category-create-row">
+          <!-- Dropdown to select a category -->
+          <select id="category">
+            <option value="" disabled selected>Select a Category</option>
+            <!-- Categories will be dynamically loaded here -->
+          </select>
+
+          <!-- Create button -->
+          <button id="submit">Create</button>
+        </div>
+        <!-- Add new category section -->
+        <input type="text" id="newCategory" placeholder="Add a new category" />
+        <div class="category-buttons">
+          <button id="addCategoryButton">Add Category</button>
+          <button id="deleteCategoryButton">Delete Category</button>
+        </div>
+      </div>
+      <div class="output">
+        <div class="search-wrapper">
+          <i class="ri-search-line"></i>
+          <!-- Font Awesome search icon -->
+          <input
+            onkeyup="searchData(this.value)"
+            type="text"
+            id="search"
+            placeholder="Search..."
+          />
+        </div>
+      </div>
+      <div class="sreachBtn">
+        <button onclick="search(this.id)" id="searchTitle">
+          Search By Name
+        </button>
+        <button onclick="search(this.id)" id="searchCatogory">
+          Search By Category
+        </button>
+        <!-- Add this button for deleting all data -->
+        <button onclick="deleteAllData()" id="deleteAllButton">
+          <i class="ri-delete-bin-line"></i>
+          Delete All Data
+        </button>
+      </div>
+      <button id="deleteSelectedButton">
+        <i class="ri-delete-bin-line"></i> Delete
+      </button>
+      <div class="table-container">
+        <table id="thead">
+          <thead>
+            <tr>
+              <!-- Empty header for checkboxes -->
+              <th></th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Discount</th>
+              <th>Total</th>
+              <th>Category</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <!-- Dynamically populated rows will go here -->
+          </tbody>
+        </table>
+      </div>
+      <div id="totalProducts" class="total-products">
+        Total Products: <span id="totalProductsCount">0</span>
+      </div>
+    </div>
+    <video id="background-video" autoplay loop muted aria-hidden="true">
+      <source
+        src="https://videos.pexels.com/video-files/9636767/9636767-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Custom confirmation modal -->
+    <div id="confirmModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <p id="confirmMessage">Delete product?</p>
+        <button id="confirmYes" class="confirm-button">Delete</button>
+        <button id="confirmNo" class="cancel-button">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Custom validation modal -->
+    <div id="validationModal" class="validation-modal" style="display: none">
+      <div class="modal-content">
+        <p id="validationMessage"></p>
+        <button id="closeModalButton">OK</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-container">
+        <div class="col-sm-6">
+          <h4>Contact Me</h4>
+          <a href="mailto:mymoon676@hotmail.com">
+            <i class="fa-duotone fa-solid fa-envelope"></i>
+          </a>
+        </div>
+        <div class="col-sm-6">
+          <p class="Copyright">
+            Created by <span> Mymoon </span>&copy; Copyright
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="admin-page.js"></script>
+  </body>
+</html>

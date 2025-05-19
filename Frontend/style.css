@@ -1,0 +1,919 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgba(0, 0, 0, 0.949);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+:root {
+    --first-color: #1a1a1a;
+    --second-color: #4d4d4d;
+    --text-color: #fff;
+    --white-color-hover: rgba(255, 255, 255, 0.884);
+    --main-color: #4CAF50;
+    --light-green: rgb(0, 255, 68);
+    --light-server: #7d7d7df6;
+    --light-red: rgb(250, 85, 85);
+    --dark-red: #c12318;
+    --nice-red: rgb(255, 0, 0);
+    --hover-color: #0d9614;
+    --transition: #29292965;
+    --darker-transition: #29292989;
+    --light-darker: #292929c0;
+    --modal-color: #404040;
+    --modal-bg: rgba(0, 0, 0, 0.4);
+    --font-big: 24px;
+    --font-bigger-normal: 20px;
+    --font-normal: 18px;
+    --font-smaller-normal: 16px;
+    --font-medium: 15px;
+    --font-small: 14px;
+    --font-smaller: 12px;
+    --font-smallest: 10px;
+    --font-w5: 500;
+    --font-w6: 600;
+    --font-w7: 700;
+    --font-w8: 800;
+}
+
+.cruds {
+    width: 100%;
+    margin: auto;
+    flex: 1;
+    padding: 2px;
+    /* Remove extra padding from the sides */
+    /* Ensure the table is aligned centrally */
+    box-sizing: border-box;
+}
+
+.header {
+    font-size: var(--font-smaller-normal);
+    text-align: center;
+    margin: 16px 0;
+    color: var(--main-color);
+}
+
+.input,
+.output {
+    width: 100%;
+    max-width: 560px;
+    margin: 6px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.output .search-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 560px;
+    margin: 6px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* This can help ensure the icon and input are aligned */
+}
+
+.output .search-wrapper i {
+    position: absolute;
+    left: 8px;
+    /* Adjust this if the icon is too far to the left */
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--light-server);
+}
+
+#search {
+    padding: 8px;
+    padding-left: 28px;
+    /* Ensures space for the icon inside the input */
+}
+
+.category-create-row {
+    display: flex;
+    width: 64%;
+    justify-content: center;
+    /* Center the elements horizontally */
+    align-items: center;
+    /* Align elements vertically */
+    gap: 20px;
+    /* Add space between the dropdown and button */
+    margin: 10px 0;
+    /* Add some spacing above and below the row */
+    flex-wrap: wrap;
+    /* Allows wrapping to the next line */
+}
+
+.category-create-row #category {
+    flex: 1;
+    /* Let the dropdown take most of the row width */
+    max-width: 58%;
+    /* Ensure it doesn't grow too large */
+}
+
+/* create button style*/
+.category-create-row #submit {
+    flex-shrink: 0;
+    /* Prevent button from shrinking */
+    background: var(--main-color);
+    color: var(--first-color);
+    font-weight: var(--font-w6);
+    border: 2px solid var(--second-color);
+    margin: 10px;
+    padding: 10px 14px;
+    font-size: var(--font-smaller-normal);
+    border-radius: 50px;
+    cursor: pointer;
+    width: 33%;
+}
+
+.input #submit:hover {
+    background: var(--first-color);
+    color: var(--main-color);
+    border: 2px solid var(--hover-color);
+}
+
+/* select category*/
+.input #category {
+    width: 100%;
+    max-width: 260px;
+    /* Ensure sufficient width */
+    background: var(--text-color);
+    color: var(--first-color);
+    font-weight: var(--font-w6);
+    border: 2px solid var(--second-color);
+    margin: 2px;
+    padding: 10px 14px;
+    /* Adequate padding */
+    font-size: var(--font-medium);
+    border-radius: 20px;
+    transition: background-color 0.4s, color 0.4s, border 0.4s;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    /* Align text to the left */
+    height: 2.8rem;
+    /* Sufficient height */
+    overflow: visible;
+    /* Ensure text is not clipped */
+}
+
+/* Container for both buttons */
+.category-buttons {
+    width: 70%;
+    display: flex;
+    gap: 20px;
+    /* Add some space between buttons */
+    justify-content: space-between;
+    /* Ensure they are spaced apart */
+}
+
+/* Button style for Add Category and Delete Category */
+.input #addCategoryButton,
+.input #deleteCategoryButton {
+    width: 100%;
+    /* Make buttons full width */
+    max-width: 300px;
+    /* Limit max width */
+    background: var(--text-color);
+    color: var(--first-color);
+    font-weight: var(--font-w6);
+    border: 2px solid var(--second-color);
+    padding: 10px 14px;
+    /* Ensure adequate padding */
+    font-size: var(--font-medium);
+    border-radius: 20px;
+    transition: background-color 0.4s, color 0.4s, border 0.4s;
+    outline: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    /* Center the text inside the button */
+    cursor: pointer;
+    height: 2.5rem;
+    /* Set a fixed height */
+    margin: 6px -14px 4px 0;
+    /* Adjust margins */
+}
+
+/* Hover effect */
+.input #category:hover,
+.input #addCategoryButton:hover,
+.input #deleteCategoryButton:hover {
+    background: var(--white-color-hover);
+    color: var(--first-color);
+}
+
+/* input style like , product, price , discount, count & and category*/
+.cruds input {
+    width: 100%;
+    height: 2rem;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 4px;
+    outline: none;
+    margin: 5px;
+    background: rgb(20, 20, 20);
+    color: var(--text-color);
+    box-shadow: 0 0 4px var(--main-color);
+}
+
+.cruds input:hover {
+    background: var(--first-color);
+    color: var(--text-color);
+    box-shadow: 0 1px 8px rgb(244, 247, 246);
+}
+
+.price {
+    display: flex;
+    width: 101%;
+    justify-content: space-between;
+}
+
+.price input {
+    width: 50%;
+}
+
+#total {
+    background: var(--dark-red);
+    border-radius: 8px;
+    padding: 6px 6px;
+    margin-top: 5px;
+    height: 2rem;
+    width: 50%;
+    text-align: left;
+}
+
+#total::before {
+    content: 'Total:';
+}
+
+.sreachBtn {
+    text-align: center;
+}
+
+/*  Search By Name & Search By Category Buttons*/
+.cruds .sreachBtn button {
+    width: 98%;
+    max-width: 200px;
+    height: 2.5rem;
+    margin: 6px 1px 4px 0;
+    background: var(--main-color);
+    color: var(--first-color);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 2px solid var(--second-color);
+    border-radius: 18px;
+    transition: background-color 0.4s, color 0.4s, border 0.4s;
+    outline: none;
+    text-align: center;
+}
+
+.cruds .sreachBtn button:hover {
+    background: var(--first-color);
+    color: var(--main-color);
+    border: 2px solid var(--hover-color);
+}
+
+/*  Delete All Data buttons*/
+.cruds .sreachBtn #deleteAllButton {
+    width: 98%;
+    max-width: 200px;
+    height: 2.5rem;
+    margin: 6px 1px 4px 0;
+    background-color: var(--first-color);
+    color: var(--nice-red);
+    border: 1px solid var(--dark-red);
+    border-radius: 18px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.4s, color 0.4s, border 0.4s;
+    outline: none;
+    text-align: center;
+}
+
+.cruds .sreachBtn #deleteAllButton:hover {
+    background-color: var(--darker-transition);
+    color: var(--light-red);
+    border: 1px solid var(--light-red);
+}
+
+#deleteAllButton i {
+    font-size: var(--font-bigger-normal);
+}
+
+/* Update Button */
+.update-btn {
+    background-color: transparent;
+    border: 2px solid var(--light-green);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin: 4px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.update-btn:hover {
+    border-color: var(--main-color);
+}
+
+.update-btn i {
+    color: var(--light-green);
+}
+
+.update-btn:hover i {
+    color: var(--main-color);
+    /* Change icon color to white on hover */
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: transparent;
+    border: 2px solid var(--light-red);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    border-color: var(--dark-red);
+}
+
+.delete-btn i {
+    color: var(--light-red);
+    font-size: var(--font-normal);
+}
+
+.delete-btn:hover i {
+    color: var(--dark-red);
+    /* Change icon color to white on hover */
+}
+
+/* Delete & Cancel buttons modal */
+.confirm-button,
+.cancel-button {
+    margin: 2px;
+    padding: 10px 14px;
+    font-size: var(--font-smaller-normal);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 30%;
+    /* Set buttons width to 48% to make them appear side by side */
+    display: inline-block;
+    /* Display buttons inline */
+}
+
+.message-success {
+    position: fixed;
+    /* Make it fixed to the viewport */
+    top: 20px;
+    /* Distance from the bottom of the screen */
+    right: 20px;
+    /* Distance from the right of the screen */
+    background: rgba(50, 205, 50, 0.2);
+    /* Light green with blur effect */
+    color: rgb(50, 205, 50);
+    /* Bright green text */
+    border: 2px solid rgb(50, 205, 50);
+    /* Green border */
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: var(--font-smaller-normal);
+    width: fit-content;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(50, 205, 50, 0.5);
+    /* Green blur shadow */
+    display: none;
+    /* Hidden by default */
+    animation: fadeInOut 3s ease-in-out;
+    z-index: 9999;
+    /* Ensure it appears above other content */
+}
+
+/* Keyframes for fade-in-out animation */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Keyframes for fade-in-out animation */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.validation-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    max-width: 320px;
+    transform: translate(-50%, -50%);
+    background-color: var(--modal-bg);
+    /* Optional: Text color */
+    font-weight: var(--font-w5);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#closeModalButton {
+    margin-top: 20px;
+    padding: 10px 24px;
+    background: var(--darker-transition);
+    color: var(--text-color);
+    border: 2px solid var(--light-green);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: var(--font-smaller);
+    font-weight: var(--font-w6);
+    cursor: pointer;
+}
+
+#closeModalButton:hover {
+    background: #45a04930;
+}
+
+#background-video {
+    position: fixed;
+    /* Fix the video to the background */
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    /* Places the video behind other content */
+    opacity: 0.7;
+}
+
+/* Add space between the Delete Selected button and the table */
+#deleteSelectedButton {
+    width: 100%;
+    max-width: 100px;
+    margin: 6px 5px -8px 8px;
+    padding: 10px;
+    background-color: var(--first-color);
+    color: var(--nice-red);
+    font-weight: var(--font-w5);
+    font-size: var(--font-smaller-normal);
+    border: 1px solid var(--dark-red);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#deleteSelectedButton:hover {
+    background-color: var(--darker-transition);
+    color: var(--light-red);
+    border: 1px solid var(--light-red);
+}
+
+#deleteSelectedButton i {
+    font-size: var(--font-bigger-normal);
+}
+
+/* Style for the checkboxes in the first column */
+table tbody input[type="checkbox"] {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.table-container {
+    overflow-x: auto;
+    /* Enables horizontal scrolling */
+    white-space: nowrap;
+    /* Prevents wrapping of table content */
+    width: 100%;
+    /* Ensures the container fits within the page */
+    max-width: 100%;
+    /* Prevents container from exceeding viewport width */
+    margin-bottom: .6rem;
+    /* Adds some space below the container */
+    padding-bottom: .8rem;
+    padding: .8rem 1rem .8rem 1rem;
+    /* To adjust the position of the scroll line*/
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: var(--darker-transition);
+    /* Keeps the header visible when scrolling */
+    z-index: 1;
+}
+
+table {
+    width: 100%;
+    margin: 1.4rem auto;
+    margin-bottom: .4rem;
+    text-align: center;
+    color: var(--text-color);
+    border-collapse: collapse;
+    background-color: var(--transition);
+    overflow-x: auto;
+    padding-left: 20px;
+    /* Add padding to the left */
+    padding-right: 10px;
+    /* Add padding to the right */
+}
+
+#tbody tr:hover {
+    background-color: var(--modal-color);
+    /* Highlight the row */
+    opacity: .9;
+}
+
+/* table header */
+#thead tr th {
+    position: relative;
+    /* Make the element a positioned container */
+    color: var(--text-color);
+    /* Fully opaque text color */
+    background: none;
+    /* Remove default background */
+    z-index: 1;
+    /* Ensure the text is above the background */
+}
+
+#thead tr th::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-server);
+    /* Semi-transparent color */
+    opacity: 0.6;
+    /* Apply transparency */
+    z-index: -1;
+    /* Place behind the text */
+    border-radius: 4px;
+    /* Optional: Add rounded corners */
+}
+
+#thead tr th,
+#thead tr td {
+    border: 2px solid var(--second-color);
+}
+
+#thead tr {
+    background-color: var(--darker-transition);
+    font-size: var(--font-smaller-normal);
+    /* Adjust font size */
+    text-align: center;
+}
+
+/* table header */
+#thead th {
+    background-color: var(--darker-transition);
+    padding: 12px;
+    font-size: var(--font-smaller-normal);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: var(--modal-bg);
+    font-weight: var(--font-w6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--modal-color);
+    padding: 20px;
+    border: 1px solid var(--light-server);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#confirmMessage {
+    font-size: var(--font-smaller-normal);
+    margin-bottom: 20px;
+}
+
+.confirm-button {
+    background-color: #ec594e;
+    color: white;
+    border: 2px solid var(--light-server);
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-button:hover {
+    background-color: var(--dark-red);
+}
+
+.cancel-button {
+    background-color: var(--second-color);
+    color: var(--text-color);
+    border: 2px solid var(--light-server);
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel-button:hover {
+    background-color: var(--darker-transition);
+    color: var(--text-color);
+}
+
+/* Style for total products */
+.total-products {
+    text-align: left;
+    margin-bottom: .7rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--font-smaller-normal);
+    color: var(--text-color);
+    padding-left: .4rem;
+    /* Remove margin from the total products section */
+}
+
+/* footer starts */
+footer {
+    background: rgb(27, 27, 27);
+    width: 100%;
+    padding: .6rem;
+    text-align: center;
+    margin-top: auto;
+    /* Push the footer to the bottom */
+    box-shadow: 0 -2px 10px var(--text-color);
+}
+
+.col-sm-6 {
+    padding: 1px 0 0 3px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.col-sm-6 h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.col-sm-6 i {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    display: inline-block;
+}
+
+.Copyright {
+    padding: .5rem;
+    color: var(--text-color);
+    font-size: 0.8rem;
+}
+
+.Copyright span {
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+/* footer ends */
+@media screen and (max-width: 760px) {
+    table {
+        width: 165%;
+        /* Increases the table width for smaller screens */
+    }
+}
+
+/* media query*/
+@media screen and (max-width: 600px) {
+    .header {
+        font-size: var(--font-smaller);
+    }
+
+    .cruds .sreachBtn button {
+        width: 60%;
+    }
+
+    button {
+        font-size: .9rem;
+        width: 100%;
+        margin: 1px 2px 2px 1px;
+    }
+
+    .input,
+    .output {
+        width: 94%;
+        max-width: 600px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #total {
+        width: 71%;
+    }
+
+    .category-create-row {
+        width: 82%;
+        gap: 1px;
+    }
+
+    .category-create-row #category {
+        width: 100%;
+        max-width: 170px;
+        /* Ensure it doesn't grow too large */
+    }
+
+    .category-create-row #submit {
+        margin: 10px;
+        padding: 10px 4px;
+        font-size: var(--font-small);
+        width: 30%;
+    }
+
+    .category-buttons {
+        align-items: center;
+        /* Center align the buttons */
+        width: 100%;
+        max-width: 360px;
+        /* Ensure it takes full width */
+        padding-right: 16px;
+    }
+
+    .input #addCategoryButton,
+    .input #deleteCategoryButton {
+        width: 70%;
+    }
+
+    .update-btn,
+    .delete-btn {
+        width: 33px;
+        height: 33px;
+        margin: 8px;
+    }
+
+    /* Delete & Cancel buttons modal */
+    .confirm-button,
+    .cancel-button {
+        margin: 2px;
+        padding: 10px 12px;
+        font-size: var(--font-medium);
+        width: 26%;
+    }
+
+    .validation-modal {
+        width: 100%;
+        max-width: 270px;
+        font-size: var(--font-small);
+    }
+
+    .modal-content {
+        padding: 10px;
+        border: 1px solid var(--light-server);
+        width: 100%;
+        max-width: 300px;
+    }
+
+    #deleteSelectedButton {
+        width: 100%;
+        max-width: 90px;
+        margin: 6px 5px -8px 8px;
+        padding: 10px;
+        font-size: var(--font-small);
+    }
+
+    #closeModalButton {
+        margin-top: 20px;
+        padding: 10px 13px;
+        width: 22%;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 352px) {
+
+    .category-create-row {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .category-create-row #submit {
+        width: 50%;
+    }
+
+    .category-create-row #category {
+        width: 100%;
+        max-width: 160px;
+        overflow: visible;
+        /* Ensure text is not clipped */
+    }
+
+    .category-buttons {
+        flex-direction: column;
+        /* Stack buttons vertically */
+        width: 100%;
+        gap: 6px;
+        width: 100%;
+        padding-left: 18px;
+    }
+
+    .input #addCategoryButton,
+    .input #deleteCategoryButton {
+        width: 80%;
+        /* Make buttons full width */
+        max-width: none;
+        /* Remove the max-width for smaller screens */
+        margin: 0;
+        /* Reduce margin to make the space smaller */
+    }
+
+    .confirmMessage {
+        font-size: var(--font-smallest);
+    }
+
+    .confirm-button,
+    .cancel-button {
+        margin: 2px;
+        padding: 10px 12px;
+        font-size: var(--font-medium);
+        width: 33%;
+    }
+
+    .validation-modal {
+        width: 100%;
+        max-width: 255px;
+        padding-left: 5px;
+        font-size: var(--font-small);
+    }
+
+    .modal-content {
+        padding: 5px;
+        width: 100%;
+        max-width: 250px;
+        font-size: var(--font-smaller);
+    }
+
+    #confirmMessage {
+        font-size: var(--font-small);
+    }
+}
