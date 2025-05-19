@@ -546,7 +546,8 @@ table tbody input[type="checkbox"] {
     /* Adds some space below the container */
     padding-bottom: .8rem;
     padding: .8rem 1rem .8rem 1rem;
-    /* To adjust the position of the scroll line*/
+    /* top right bottom left */
+    /* To adjust the position of the scroll line */
 }
 
 thead th {
