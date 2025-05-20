@@ -11,7 +11,7 @@ const categoryRoutes = require("./routes/categories"); // Import category routes
 const productRoutes = require("./routes/products"); // Import product routes
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware to enable CORS (Cross-Origin Resource Sharing).
 app.use(cors());
