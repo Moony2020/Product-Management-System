@@ -2,7 +2,7 @@
  * Entry point for the Product Management System backend server.
  * Configures middleware, routes, and database connections.
  */
-require("dotenv").config();
+require("dotenv").config(); // <-- required to load .env variables
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
