@@ -1,4 +1,0 @@
-[build]
-  command = "npm install"  # Just install dependencies
-  publish = "."            # Point to root directory (no dist needed)
-  functions = "functions"  # Only if using serverless functions
