@@ -90,7 +90,7 @@ create.onclick = function() {
   };
   // Handle product update or creation based on 'mood'
   if (mood === "update") {
-    fetch(`http://localhost:3000/v1/products/${tmp}`, {
+    fetch(`/v1/products/${tmp}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -113,7 +113,7 @@ create.onclick = function() {
   } else {
     // Adding new products with the specified count
     for (let i = 0; i < count; i++) {
-      fetch("http://localhost:3000/v1/products", {
+      fetch("/v1/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -174,7 +174,7 @@ function showValidationModal(message) {
  */
 // Function to load products and add checkboxes to the table
 function showProductData() {
-  fetch("http://localhost:3000/v1/products")
+  fetch("/v1/products")
     .then(response => response.json())
     .then(data => {
       let table = "";
@@ -231,7 +231,7 @@ document.getElementById("deleteSelectedButton").onclick = function() {
   const message = `Delete ${productIds.length} selected product(s)?`;
   
   showDeleteConfirmation(message, function() {
-    fetch("http://localhost:3000/v1/products/delete-selected", {
+    fetch("/v1/products/delete-selected", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ productIds })
@@ -295,7 +295,7 @@ window.onload = function() {
 document.getElementById("addCategoryButton").onclick = function() {
   let categoryName = document.getElementById("newCategory").value.trim();
   if (categoryName !== "") {
-    fetch("http://localhost:3000/v1/categories/add", {
+    fetch("/v1/categories/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -333,7 +333,7 @@ document.getElementById("deleteCategoryButton").onclick = function(name) {
   }
 
   // Check if the category is associated with products
-  fetch(`http://localhost:3000/v1/categories/check-products/${categoryId}`)
+  fetch(`/v1/categories/check-products/${categoryId}`)
     .then(response => response.json())
     .then(products => {
       if (products.length > 0) {
@@ -352,7 +352,7 @@ document.getElementById("deleteCategoryButton").onclick = function(name) {
 
       // Bind Yes button action
       document.getElementById("confirmYes").onclick = function() {
-        fetch(`http://localhost:3000/v1/categories/${categoryId}`, {
+        fetch(`/v1/categories/${categoryId}`, {
           method: "DELETE"
         })
           .then(response => response.json())
@@ -382,7 +382,7 @@ document.getElementById("deleteCategoryButton").onclick = function(name) {
  * Loads all categories from the server and populates the category dropdown.
  */
 function loadCategories() {
-  fetch("http://localhost:3000/v1/categories")
+  fetch("/v1/categories")
     .then(response => response.json())
     .then(data => {
       let categorySelect = document.getElementById("category");
@@ -437,7 +437,7 @@ function updateProductData(id) {
   console.log("Updating product with ID:", id);
 
   // Fetch the product by its MongoDB _id (use the correct port: 3000)
-  fetch(`http://localhost:3000/v1/products/${id}`, {
+  fetch(`/v1/products/${id}`, {
     method: "GET"
   })
     .then(response => {
@@ -488,7 +488,7 @@ function deleteProductData(mongoId, userFriendlyId, name) {
   const message = `Delete product? <br><br><strong>ID (${userFriendlyId})</strong> : <strong>${name}</strong>`;
   
   showDeleteConfirmation(message, function() {
-    fetch(`http://localhost:3000/v1/products/${mongoId}`, {
+    fetch(`/v1/products/${mongoId}`, {
       method: "DELETE"
     })
     .then(response => {
@@ -511,7 +511,7 @@ function deleteProductData(mongoId, userFriendlyId, name) {
  * Deletes all products from the server after confirmation.
  */
 deleteAllButton.onclick = function() {
-  fetch("http://localhost:3000/v1/products")
+  fetch("/v1/products")
     .then(response => response.json())
     .then(data => {
       const productCount = data.length;
@@ -523,7 +523,7 @@ deleteAllButton.onclick = function() {
       const message = `Delete all ${productCount} products?`;
       
       showDeleteConfirmation(message, function() {
-        fetch("http://localhost:3000/v1/products", {
+        fetch("/v1/products", {
           method: "DELETE"
         })
         .then(response => {
@@ -568,7 +568,7 @@ function showMessage(message) {
  * @param {string} value - The search query entered by the user.
  */
 function searchData(value) {
-  fetch("http://localhost:3000/v1/products")
+  fetch("/v1/products")
     .then(response => response.json())
     .then(data => {
       let filteredData;
