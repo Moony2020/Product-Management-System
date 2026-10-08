@@ -153,13 +153,19 @@ body {
     font-weight: var(--font-w6);
     border: 2px solid var(--second-color);
     margin: 2px;
-    padding: 10px 14px;
+    padding: 10px 44px 10px 14px;
     /* Adequate padding */
     font-size: var(--font-medium);
     border-radius: 20px;
     transition: background-color 0.4s, color 0.4s, border 0.4s;
     outline: none;
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.25 6 6.25l5-5' fill='none' stroke='%23222222' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px 8px;
     text-align: left;
     /* Align text to the left */
     height: 2.8rem;
